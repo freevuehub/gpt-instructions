@@ -9,11 +9,10 @@ RUN yarn --frozen-lockfile
 
 FROM node:18-alpine AS builder
 
-ARG ENV_MODE 
 WORKDIR /usr/src/app
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY . .
-COPY .env.$ENV_MODE ./.env.production
+COPY .env ./.env
 RUN yarn build
 
 # ----
