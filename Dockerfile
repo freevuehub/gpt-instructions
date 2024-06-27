@@ -1,13 +1,10 @@
-FROM node:lts
+FROM node:20-slim AS base
 
-RUN mkdir -p /app
-WORKDIR /app
-COPY . ./
-ADD . /app
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+RUN yarn build
 ENV HOST 0.0.0.0
 ENV TZ=Asia/Seoul
-RUN yarn
-RUN yarn build
 EXPOSE 3000
 
-CMD ["yarn", "start"]
+CMD [ "yarn", "start" ]
