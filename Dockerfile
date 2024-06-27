@@ -1,4 +1,4 @@
-FROM node:20-slim AS deps
+FROM node:20-alpine AS deps
 
 RUN apk add --no-cache libc6-compat
 WORKDIR /usr/src/app
@@ -7,7 +7,7 @@ RUN yarn --frozen-lockfile
 
 # ----
 
-FROM node:20-slim AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /usr/src/app
 COPY --from=deps /usr/src/app/node_modules ./node_modules
@@ -17,7 +17,7 @@ RUN yarn build
 
 # ----
 
-FROM node:20-slim AS runner
+FROM node:20-alpine AS runner
 
 WORKDIR /usr/src/app
 RUN addgroup --system --gid 1001 nodejs
