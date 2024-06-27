@@ -6,12 +6,13 @@ import { pipe, map, toArray, split, zipWithIndex } from '@fxts/core'
 type Props = {
   params: {
     id: string
+    type: string
   }
 }
 
 const Text = async (props: Props) => {
   const file = await fs.readFile(
-    `${process.env.ROOT || ''}/Doc/${props.params.id}/ko-dialog.txt`,
+    `${process.env.ROOT || ''}/Doc/${props.params.id}/ko-${props.params.type}.txt`,
     'utf8'
   )
 

@@ -1,6 +1,10 @@
 // docker build --tag gpt/instruction:latest .
 
-const { spawn } = require('node:child_process')
+const { spawn, exec } = require('node:child_process')
+const dockerBuildExec = exec(
+  'docker build --tag gpt/instruction:latest .',
+  (error, stdout, stderr) => {}
+)
 const dockerBuild = spawn('docker build --tag gpt/instruction:latest .')
 
 dockerBuild.stdout.on('data', (data) => {
